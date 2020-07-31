@@ -1,6 +1,5 @@
 #+TITLE: Week 03
 #+AUTHOR: Nicholas Cheng
-#+DATE: 31 Jul, 2020
 #+OPTIONS: toc:nil
 #+latex_header: \hypersetup{colorlinks=true}
 
@@ -58,7 +57,7 @@ let a = 1; // Mutable reference
 const b = 2; // Immutable reference
 
 a = 2; // This works
-b = 3; // Uncaught TypeError: invalid assignment to const 'b'This won't work
+b = 3; // Uncaught TypeError: invalid assignment to const 'b'
 
 const c = [1, 2, 3];
 
