@@ -6,6 +6,17 @@
 - **pure function** &mdash; A function that only returns a value &amp; always returns the same value for the same input [\[2\]][2].
 - **referential transparency** &mdash; An expression that can be replaced with its corresponding value without changing the program's behaviour [\[3\]][3].
 
+```javascript
+const x = [1, 2, 3];
+const pure = (x) => x;
+const sideEffect = (x) => (x[0] = x[0] + 1);
+
+console.log(x); // Output: [1, 2, 3]
+console.log(pure(x)); // Output: [1, 2, 3]
+console.log(sideEffect(x)); // Output: 2
+console.log(x); // Output: [2, 2, 3]
+```
+
 ## JavaScript features for functional programming
 
 JavaScript has several features that make it possible to practice functional programming. This is in addition to having map, filter, reduce and lambda functions. Familiarise yourself with these features and the ideas behind them to have an easier time completing future tutorials.
