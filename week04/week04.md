@@ -61,6 +61,7 @@ Nothing happens until you have _subscribers_.
    - Refer to RxJS docs for `takeUntil` and try to simulate its effect without importing it.
 3. `keyboardControl`
    - Animation follows previous `animatedRect` & `animatedRectTimer`.
+   - `merge` is an Operator instead of a static method, so syntax is `observable1.pipe(merge(...))`.
    - Choosing an animation without if or switch statements.
      - Each time an Observable fires, it emits a value.
      - Recall that functions can be used as values.
