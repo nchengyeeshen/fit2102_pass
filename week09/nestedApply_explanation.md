@@ -36,7 +36,7 @@ map f = foldr ((:) . f) []
 Using this definition of `map`, in the first iteration, this happens
 
 ```haskell
-(<*> (Just 2)) (Just (*2)) = Just (*2) <*> Just 2 = Just 4
+(<*> (Just 2)) (Just (*2)) = Just (2 * 2) = Just 4
 ```
 
 This is then added to the accumulator, so it has the value `[Just 4]`.
@@ -44,7 +44,7 @@ This is then added to the accumulator, so it has the value `[Just 4]`.
 In the second iteration, this happens
 
 ```haskell
-(<*> (Just 2)) (Just (+1)) = Just (+1) <*> Just 2 = Just 3
+(<*> (Just 2)) (Just (+1)) = Just (2 + 1) = Just 3
 ```
 
 This is then added to the accumulator which had a value of `[Just 4]`, therefore it now has the value of `[Just 3, Just 4]`.
@@ -64,7 +64,7 @@ nestedApply [Id (++" hello"),Id (++" world!")] (Id "hello")
 In the first iteration, this happens
 
 ```haskell
-(<*> (++" hello")) (Id "hello") = Id "hello" ++ Id " hello" = Id "hello hello"
+(<*> (++" hello")) (Id "hello") = Id ("hello" ++ " hello") = Id "hello hello"
 ```
 
 This result is added to the accumulator, so it now has the value `[Id "hello hello"]`.
@@ -72,7 +72,7 @@ This result is added to the accumulator, so it now has the value `[Id "hello hel
 In the second iteration, this happens
 
 ```haskell
-(<*> (++" world!")) (Id "hello") = Id "hello" ++ Id " world!" = Id "hello world!"
+(<*> (++" world!")) (Id "hello") = Id ("hello" ++ " world!") = Id "hello world!"
 ```
 
 This result is added to the accumulator, which had the value `[Id "hello hello"]` so it now has the value `[Id "hello world!", Id "hello hello"]`.
