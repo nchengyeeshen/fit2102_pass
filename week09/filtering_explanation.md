@@ -16,6 +16,16 @@ Therefore, `filtering` restated looks like this
 filtering p = foldr (lift (consIf a) (p a)) (pure [])
 ```
 
+We can further restate this using the definition of `lift`, which is defined as follows
+
+```haskell
+lift f a b = f <$> a <*> b
+```
+
+```haskell
+filtering p = foldr ((consIf a) <$> (p a) <*>) (pure [])
+```
+
 At each 'iteration', we will be evaluating `lift (consIf a) (p a)`.
 
 What does an application of `(consIf a) (p a)` look like?
@@ -35,7 +45,10 @@ consIf 1 True [] = 1 : [] = [1]
 Therefore
 
 ```haskell
-lift (consIf 1) ((const [True, True]) 1) [[]] = [[1], [1]]
+lift (consIf 1) ((const [True, True]) 1) [[]]
+= (consIf 1) <$> (const [True, True] 1) <*> [[]]
+= [(consIf 1 True), (consIf 1 True)] <*> [[]]
+= [[1], [1]]
 ```
 
 What if we tried another evaluation of `filtering`?
@@ -65,7 +78,10 @@ consIf 1 True [2] = 1 : [2] = [1, 2]
 Due to the applicative effect, we will see that for each element in the list, `[[2], [2]]`, we will get `[[1, 2], [1, 2]]`. Since there's two elements in the list, the result will look like this.
 
 ```haskell
-lift (consIf 1) ((const [True, True]) 1) [[2], [2]] = [[1, 2], [1, 2], [1, 2], [1, 2]]
+lift (consIf 1) ((const [True, True]) 1) [[2], [2]]
+= (consIf 1) <$> (const [True, True] 1) <*> [[2], [2]]
+= [(consIf 1 True), (consIf 1 True)] <*> [[2], [2]]
+= [[1, 2], [1, 2], [1, 2], [1, 2]]
 ```
 
 Finally, we've come to the actual evaluation we're interested in.
